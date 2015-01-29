@@ -42,23 +42,19 @@ module MMonit
 		end
 
 		def status
-			JSON.parse(self.request('/json/status/list').body)['records']
+			JSON.parse(self.request('/status/hosts/list').body)['records']
 		end
 
 		def hosts
-			JSON.parse(self.request('/json/admin/hosts/list').body)['records']
+			JSON.parse(self.request('/admin/hosts/list').body)['records']
 		end
 
 		def users
-			JSON.parse(self.request('/json/admin/users/list').body)
-		end
-
-		def alerts
-			JSON.parse(self.request('/json/admin/alerts/list').body)
+			JSON.parse(self.request('/admin/users/list').body)
 		end
 
 		def events
-			JSON.parse(self.request('/json/events/list').body)['records']
+			JSON.parse(self.request('/reports/events/list').body)['records']
 		end
 
 		####  topography and reports are disabled until I figure out their new equivalent in M/Monit
@@ -79,7 +75,7 @@ module MMonit
 
 		# another option:  /admin/hosts/json/get?id=####
 		def get_host_details(id)
-			JSON.parse(self.request("/json/status/detail?hostid=#{id}").body)['records']['host'] rescue nil
+			JSON.parse(self.request("/status/hosts/get?id=#{id}").body)['records']['host'] rescue nil
 		end
 
 		def delete_host(host)
